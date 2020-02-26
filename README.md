@@ -42,17 +42,16 @@ Forked from mozilla-services/websec-check and based/mixed from:
 - [ ] Anchor Docker versions, avoid generics like `node:10` or latests versions `node:latest`
 - [ ] Correctly set client IP
   - [ ] Confirm client ip is in the proper location in [X-Forwarded-For](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For), modifying what is sent from the client if needed. AWS and GCP's load balancers will do this automatically.
-  - [ ] [ ] Make sure the web server and the application get the true client IP by configuring trusted IP's within [Nginx (ngx_http_realip_module)](https://nginx.org/en/docs/http/ngx_http_realip_module.html) or [Apache (mod_remoteip)](https://httpd.apache.org/docs/2.4/mod/mod_remoteip.html)
+  - [ ] Make sure the web server and the application get the true client IP by configuring trusted IP's within [Nginx (ngx_http_realip_module)](https://nginx.org/en/docs/http/ngx_http_realip_module.html) or [Apache (mod_remoteip)](https://httpd.apache.org/docs/2.4/mod/mod_remoteip.html)
   - [ ] If you have a service-oriented architecture, you must always be able to find the IP of the client that sent the initial request. Recommendation: pass along the `X-Forwarded-For` to all back-end services.
-- [ ] Use an API Gateway service to enable caching, Rate Limit policies and deploy APIs resources dynamically.
+- [ ] Use an API Gateway service to enable caching, Rate Limit policies and deploy APIs resources dynamically.
 - [ ] Do not forget to turn the DEBUG mode OFF.
 - [ ] Use feature flags.
 - [ ] Remove fingerprinting headers (`X-Powered-By`, etc...)
 - [ ] Design a rollback solution for deployments.
 - [ ] When managing permissions, make sure access controls are enforced server-side
-- [ ] If an authenticated user accesses protected resource, make sure the pages with those resource arent cached and served up to unauthenticated users (like via a CDN).
-- [ ] If handling cryptographic keys, must have a mechanism to handle quarterly key rotations
-  - Keys used to sign sessions don't need a rotation mechanism if destroying all sessions is acceptable in case of emergency.
+- [ ] If an authenticated user accesses protected resource, make sure the pages with those resource aren't cached and served up to unauthenticated users (like via a CDN).
+- [ ] If handling cryptographic keys, must have a mechanism to handle quarterly key rotations. Keys used to sign sessions don't need a rotation mechanism if destroying all sessions is acceptable in case of emergency.
 - [ ] Do not proxy requests from users without strong limitations and filtering (see [Pocket UserData vulnerability](https://www.gnu.gl/blog/Posts/multiple-vulnerabilities-in-pocket/)). Don't proxy requests to [link local, loopback, or private networks](https://en.wikipedia.org/wiki/Reserved_IP_addresses#IPv4) or DNS that resolves to addresses in those ranges (i.e. 169.254.0.0/16, 127.0.0.0/8, 10.0.0.0/8, 100.64.0.0/10, 172.16.0.0/12, 192.168.0.0/16, 198.18.0.0/15).
 - [ ] Do not use `target="_blank"` in external links unless you also use `rel="noopener noreferrer"` (to prevent [Reverse Tabnabbing](https://www.owasp.org/index.php/Reverse_Tabnabbing))
 
@@ -135,7 +134,7 @@ Forked from mozilla-services/websec-check and based/mixed from:
 - [ ] Don’t use any sensitive data in the URL, but use standard Authorization header (Barrer Tokens).
 - [ ] Use a CDN for file uploads.
 - [ ] When using cookies for session management, make sure you have CSRF protections in place, which in 99% of cases is [SameSite cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#SameSite_cookies). If you can't use SameSite, use anti CSRF tokens. There are two exceptions to implementing CSRF protection:
-  - [ ] Forms that don't change state (e.g. search forms) don't need CSRF protection and can indicate that by setting the 'data-no-csrf' form attribute (this tells our ZAP scanner to ignore those forms when testing for CSRF).
+  - [ ] Forms that don't change state (e.g. search forms) don't need CSRF protection and can indicate that by setting the 'data-no-csrf' form attribute (this tells our ZAP scanner to ignore those forms when testing for CSRF).
   - [ ] Sites that don't use cookies for anything sensitive can ignore CSRF protection. A lot of modern sites prefer to use local-storage JWTs for session management, which aren't vulnerable to CSRF (but must have a rock solid CSP).
 
 ### Frontend
@@ -179,7 +178,7 @@ Forked from mozilla-services/websec-check and based/mixed from:
 - [ ] Make token expiration (TTL, RTTL) as short as possible.
 - [ ] Don’t store sensitive data in the JWT payload, it can be decoded easily.
 
-## Databases
+## Databases
 
 - [ ] All SQL queries must be parameterized, not concatenated
 - [ ] Applications must use accounts with limited GRANTS when connecting to databases
