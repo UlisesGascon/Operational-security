@@ -4,14 +4,14 @@ This repo is a personal security list that will change on the time. It is heavil
 
 ## Attribution
 
-Forked from mozilla-services/websec-check and based/mixed from: 
+Forked from mozilla-services/websec-check and based/mixed from:
+
 - [Mozilla Websec-check](https://github.com/mozilla-services/websec-check)
 - [mozilla-services/GitHub-Audit](https://github.com/mozilla-services/GitHub-Audit/blob/master/docs/checklist.md)
 - [Threat model for GitHub repositories](https://github.com/mozilla-services/GitHub-Audit/blob/master/docs/threat.md)
 - [Threat model for GitHub repositories (Threats)](https://github.com/mozilla-services/GitHub-Audit/blob/master/docs/graph.md)
 - [Mozilla Security Guidelines](https://infosec.mozilla.org/guidelines/web_security)
 - [Shieldfy blog | API Security Checklist](https://shieldfy.io/blog/api-security-checklist/)
-
 
 ## Developer Operational Security
 
@@ -80,12 +80,14 @@ Forked from mozilla-services/websec-check and based/mixed from:
 - [ ] If you expose sensitive information the leaked data still in the git history after removal [See](https://help.github.com/en/github/authenticating-to-github/removing-sensitive-data-from-a-repository)
 
 ## Logging
+
 - [ ] Use whitelisting/blacklisting mechanisms to prevent publication of sensitive information about Business logic (pass, emails, etc..)
 - [ ] Add a login platform to the project
 - [ ] Access control failures must be logged at WARN level
 - [ ] Access and application logs must be archived for a minimum of 90 days
 
 ## Alerts/subscriptions
+
 - [ ] Add alerts to platforms (emails, slack...) for new Open Source Projects (issues, releases, etc...) and registry (NPM, DockerHub...)
 - [ ] Add alerts to running projects for live environment in the platforms (for Warn and Error level)
 
@@ -98,23 +100,23 @@ Forked from mozilla-services/websec-check and based/mixed from:
 - [ ] Only tagged versions from Source Control must be deployed in the registry
 - [ ] Checksums must be added to tag version in Source control
 
-
 ## Common
 
 ### NPM Dependencies (devDependencies and Dependencies)
+
 - [ ] Anchor versions in package.json
 - [ ] Add NPM Scripts to handle:
-    - [ ] Dependencies outdated `npm outdated`
-    - [ ] Security checks from Snyk `snyk test`
-    - [ ] Auto-upgrade dependencies with `npm-check-updates`
-    - [ ] Lock package-lock.json using (?????)
-    - [ ] Avoid risky dependencies (non-updated for years, few downloads per week, weird dependencies, etc...)
+  - [ ] Dependencies outdated `npm outdated`
+  - [ ] Security checks from Snyk `snyk test`
+  - [ ] Auto-upgrade dependencies with `npm-check-updates`
+  - [ ] Lock package-lock.json using (?????)
+  - [ ] Avoid risky dependencies (non-updated for years, few downloads per week, weird dependencies, etc...)
 - [ ] Add Husky to add dependencies check as `pre-pull`
-
 
 ## Web Applications
 
-### Common
+### Common for Web Applications
+
 - [ ] Websites must redirect to HTTPS, API endpoints should disable HTTP entirely
 - [ ] Sites should use HTTPS (or other secure protocols) for all communications
 - [ ] Both passive and active resources should be loaded through protocols using TLS, such as HTTPS
@@ -137,6 +139,7 @@ Forked from mozilla-services/websec-check and based/mixed from:
   - [ ] Sites that don't use cookies for anything sensitive can ignore CSRF protection. A lot of modern sites prefer to use local-storage JWTs for session management, which aren't vulnerable to CSRF (but must have a rock solid CSP).
 
 ### Frontend
+
 - [ ] Must have a CSP with:
   - [ ] a report-uri endpoint `/__cspreport__`
   - [ ] web API responses should return `default-src 'none'; frame-ancestors 'none'; base-uri 'none'; report-uri /__cspreport__` to disallowing all content rendering, framing, and report violation
@@ -169,13 +172,15 @@ Forked from mozilla-services/websec-check and based/mixed from:
 - [ ] If you are parsing XML files, make sure entity expansion is not enabled to avoid `Billion Laughs/XML bomb` via exponential entity expansion attack.
 - [ ] Validate POST body size should be small (<500kB) unless explicitly needed
 
-#### JWT 
+#### JWT
+
 - [ ] Use a random complicated key (JWT Secret) to make brute forcing the token very hard.
 - [ ] Don’t extract the algorithm from the payload. Force the algorithm in the backend (HS256 or RS256).
 - [ ] Make token expiration (TTL, RTTL) as short as possible.
 - [ ] Don’t store sensitive data in the JWT payload, it can be decoded easily.
 
 ## Databases
+
 - [ ] All SQL queries must be parameterized, not concatenated
 - [ ] Applications must use accounts with limited GRANTS when connecting to databases
 - [ ] Applications **must not use admin or owner accounts**, to decrease the impact of a sql injection vulnerability.
@@ -185,4 +190,3 @@ Forked from mozilla-services/websec-check and based/mixed from:
 - [ ] Never dump production data to staging or development environment
 - [ ] Audit and Monitor Database Activity
 - [ ] Add alerts for critical cases and warnings
-
