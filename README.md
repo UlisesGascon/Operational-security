@@ -108,7 +108,7 @@ Forked from mozilla-services/websec-check and based/mixed from:
   - [ ] Dependencies outdated `npm outdated`
   - [ ] Security checks from Snyk `snyk test`
   - [ ] Auto-upgrade dependencies with `npm-check-updates`
-  - [ ] Lock package-lock.json using (?????)
+  - [ ] Lock package-lock.json using [lockfile-lint](https://github.com/lirantal/lockfile-lint)
   - [ ] Avoid risky dependencies (non-updated for years, few downloads per week, weird dependencies, etc...)
 - [ ] Add Husky to add dependencies check as `pre-pull`
 
